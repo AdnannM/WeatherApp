@@ -7,12 +7,15 @@
 
 import UIKit
 import CoreLocation
+import WidgetKit
 
 class LocationTableViewController: UITableViewController {
   
     @IBOutlet weak var searchBar: UISearchBar!
     
-        let locations = ["Paris, France", "Kyoto, Japan", "Sydney, Australia", "Seattle, U.S.", "New York, U.S.", "Hong Kong, Hong Kong", "Taipei, Taiwan", "London, U.K.", "Vancouver, Canada"]
+    var defaults = UserDefaults(suiteName: "group.com.adnannmuratovic.weatherapp")
+    
+        let locations = ["Paris, France", "Kyoto, Japan", "Sydney, Australia", "Seattle, U.S.", "New York, U.S.", "Hong Kong, Hong Kong", "Taipei, Taiwan", "London, U.K.", "Vancouver, Canada", "Sarajevo, Bosnia and Herzegovina"]
         
         var selectedLocation = "" {
             didSet {
@@ -63,7 +66,11 @@ class LocationTableViewController: UITableViewController {
             cell?.accessoryType = .checkmark
             if let location = cell?.textLabel?.text {
                 selectedLocation = location
+                
+                defaults?.setValue(selectedCity, forKey: "city")
             }
+            
+            WidgetCenter.shared.reloadAllTimelines()
             
             tableView.reloadData()
     }

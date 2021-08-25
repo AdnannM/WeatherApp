@@ -13,9 +13,9 @@ protocol WeatherManagerDelegate {
     func didFailWithError(error: Error)
 }
 
-class WeatherService {
+public class WeatherService {
     
-    typealias WeatherDataCompletionBlock = (_ data: WeatherData?) -> ()
+    public typealias WeatherDataCompletionBlock = (_ data: WeatherData?) -> ()
     
     let openWeatherApi =  "http://api.openweathermap.org/data/2.5/weather?appid=a3801d58cfc7ee7e44e7b0b64ee3384c&units=metric&q="
     
@@ -23,11 +23,11 @@ class WeatherService {
     
     let urlSession = URLSession.shared
     
-    class func sharedWeatherServices() -> WeatherService {
+    public class func sharedWeatherServices() -> WeatherService {
         return _sharedWeatherServices
     }
     
-    func getCurrentWeather(location: String, completion: @escaping WeatherDataCompletionBlock) {
+    public func getCurrentWeather(location: String, completion: @escaping WeatherDataCompletionBlock) {
         let openWeatherAPI = openWeatherApi + location.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!
         
         print(openWeatherAPI)

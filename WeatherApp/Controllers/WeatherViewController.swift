@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import WeatherInfoKit
 
 class WeatherViewController: UIViewController {
     // MARK: Properties
@@ -15,8 +16,8 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     
-    var city = "Paris"
-    var country = "France"
+    var city = "Sarajevo"
+    var country = "Bosnia and Herzegovina"
 
     var currentLocation: CLLocation?
     

@@ -99,7 +99,7 @@ struct Weather_Widget: Widget {
             Weather_WidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Weather Widget")
-        .description("This widget is designed to display the curren weather information.")
+        .description("This widget is designed to display the current weather information.")
     }
 }
 

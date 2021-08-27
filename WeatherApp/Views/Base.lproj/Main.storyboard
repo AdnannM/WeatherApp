@@ -109,14 +109,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="7t0-2z-qGc">
-                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="R80-Yw-IzB">
-                                <rect key="frame" x="0.0" y="68.333333969116211" width="390" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R80-Yw-IzB" id="3K3-Le-dj5">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
@@ -135,15 +130,19 @@
                                 <segue destination="fFG-lw-3Fo" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="x7d-VX-c11"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FXf-a1-iTH">
-                            <connections>
-                                <segue destination="fFG-lw-3Fo" kind="unwind" unwindAction="updateWeatherWithSegue:" id="ipf-HD-y5F"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="done" id="FXf-a1-iTH">
+                                <connections>
+                                    <segue destination="fFG-lw-3Fo" kind="unwind" unwindAction="updateWeatherWithSegue:" id="ipf-HD-y5F"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="MOX-zq-coa">
+                                <connections>
+                                    <action selector="addCity:" destination="kcK-BB-g1n" id="XV9-Ze-42U"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
-                    <connections>
-                        <outlet property="searchBar" destination="7t0-2z-qGc" id="lQR-cW-UTX"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bw-Pk-LX1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="fFG-lw-3Fo" userLabel="Exit" sceneMemberID="exit"/>

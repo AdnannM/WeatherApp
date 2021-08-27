@@ -69,7 +69,7 @@ struct Weather_WidgetEntryView : View {
             VStack {
                 Text(entry.city.capitalized)
                     .font(.system(size: 20, weight: .black, design: .rounded))
-                    .padding(.bottom, 2)
+                    .padding(.bottom, 5)
                     .foregroundColor(.white)
                 Text(entry.weatherData.weather.capitalized)
                     .font(.footnote)

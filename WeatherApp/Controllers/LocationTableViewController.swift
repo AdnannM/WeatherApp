@@ -10,12 +10,12 @@ import CoreLocation
 import WidgetKit
 
 class LocationTableViewController: UITableViewController {
-  
-    @IBOutlet weak var searchBar: UISearchBar!
     
     var defaults = UserDefaults(suiteName: "group.com.adnannmuratovic.weatherapp")
     
-        let locations = ["Paris, France", "Kyoto, Japan", "Sydney, Australia", "Seattle, U.S.", "New York, U.S.", "Hong Kong, Hong Kong", "Taipei, Taiwan", "London, U.K.", "Vancouver, Canada", "Sarajevo, Bosnia and Herzegovina"]
+    var locations = ["Paris, France", "Kyoto, Japan", "Sydney, Australia", "Seattle, U.S.", "New York, U.S.", "Hong Kong, Hong Kong", "Taipei, Taiwan", "London, U.K.", "Vancouver, Canada", "Sarajevo, Bosnia and Herzegovina"]
+    
+    
         
         var selectedLocation = "" {
             didSet {
@@ -32,6 +32,7 @@ class LocationTableViewController: UITableViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             
+           
         }
 
         override func didReceiveMemoryWarning() {
@@ -73,5 +74,26 @@ class LocationTableViewController: UITableViewController {
             WidgetCenter.shared.reloadAllTimelines()
             
             tableView.reloadData()
+    }
+    
+    // MARK: Action
+    @IBAction func addCity(_ sender: UIBarButtonItem) {
+        let ac = UIAlertController(title: "Add City", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        let submitAcion = UIAlertAction(title: "OK", style: .default) { [weak self, weak ac]_ in
+            guard let takeCity = ac?.textFields?[0].text else { return }
+            self?.submit(takeCity)
+        }
+        
+        ac.addAction(submitAcion)
+        present(ac, animated: true)
+    }
+    
+    private func submit(_ action: String) {
+        locations.insert(action, at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
     }
 }

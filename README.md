@@ -8,6 +8,8 @@ SimpleWeatherApp
 - Widget View
 -  Sharing Data with the Container App
 -  UIBarButtonItem for adding City
+-  Save data with User Defaults
+-  Remove data from tableViewCell
 
 
 

@@ -13,16 +13,18 @@ class LocationTableViewController: UITableViewController {
     
     var defaults = UserDefaults(suiteName: "group.com.adnannmuratovic.weatherapp")
     
-    var locations = ["Paris, France", "Kyoto, Japan", "Sydney, Australia", "Seattle, U.S.", "New York, U.S.", "Hong Kong, Hong Kong", "Taipei, Taiwan", "London, U.K.", "Vancouver, Canada", "Sarajevo, Bosnia and Herzegovina"]
+//    let savedData = SaveData()
     
+    var locations = [String]()
     
-        
+
         var selectedLocation = "" {
             didSet {
                 let locations = selectedLocation.split { $0 == "," }.map { String($0) }
                 
                 selectedCity = locations[0]
                 selectedCountry = locations[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                
             }
         }
         
@@ -31,8 +33,7 @@ class LocationTableViewController: UITableViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            
-           
+            loadData()
         }
 
         override func didReceiveMemoryWarning() {
@@ -58,7 +59,8 @@ class LocationTableViewController: UITableViewController {
             // Configure the cell...
             cell.textLabel?.text = locations[indexPath.row]
             cell.accessoryType = (locations[indexPath.row] == selectedLocation) ? .checkmark : .none
-
+            saveData()
+            
             return cell
         }
         
@@ -74,6 +76,14 @@ class LocationTableViewController: UITableViewController {
             WidgetCenter.shared.reloadAllTimelines()
             
             tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            locations.remove(at: 0)
+            tableView.reloadData()
+            
+        }
     }
     
     // MARK: Action
@@ -95,5 +105,34 @@ class LocationTableViewController: UITableViewController {
         locations.insert(action, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
+    }
+}
+
+// MARK: - SaveCity UserDefaults
+extension LocationTableViewController {
+    private func loadData() {
+        let defaults = UserDefaults.standard
+        if let saveCity = defaults.object(forKey: "city") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                locations = try jsonDecoder.decode([String].self, from: saveCity)
+            }
+            
+            catch {
+                print("Failed to load Items")
+            }
+        }
+        
+    }
+    
+    private func saveData() {
+        let jsonEncoder = JSONEncoder()
+        if let saveData = try? jsonEncoder.encode(locations) {
+            let defaults = UserDefaults.standard
+            defaults.set(saveData, forKey: "city")
+        } else {
+            print("Failed to Save City")
+        }
     }
 }
